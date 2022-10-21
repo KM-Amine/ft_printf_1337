@@ -6,13 +6,13 @@
 /*   By: mkhellou < mkhellou@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 09:05:57 by mkhellou          #+#    #+#             */
-/*   Updated: 2022/10/21 09:52:39 by mkhellou         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:09:51 by mkhellou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
