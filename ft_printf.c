@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkhellou < mkhellou@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 08:48:25 by mkhellou          #+#    #+#             */
-/*   Updated: 2022/10/21 09:52:33 by mkhellou         ###   ########.fr       */
+/*   Created: 2022/10/21 09:06:03 by mkhellou          #+#    #+#             */
+/*   Updated: 2022/10/21 09:52:23 by mkhellou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
+#include "ft_printf.h"
+#include <stdio.h>
+// int	ft_printf(const char *s, ...);
+// {
+	
+// }
 
-size_t	ft_strlen(char *s);
-void	ft_putchar(char c, int *len);
-void	ft_putstr(char *s, int *len);
-void	ft_putnbr(long i, int *len);
-void	ft_puthex(unsigned int i, char *base, int *len);
-int		ft_printf(const char *s, ...);
+int main (void)
+{
+	int	i;
 
-#endif
+	i = 0;
+	printf("%x\n",-1);
+	ft_puthex(-1,"0123456789abcdef",&i);
+	//ft_putnbr(12,&i);
+}

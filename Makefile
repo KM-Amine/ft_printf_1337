@@ -2,7 +2,7 @@ NAME = libftprintf.a
 CC = cc
 RM = rm -rf
 AR = ar rcs
-SRC = $(wildcard *.c)
+SRC = ft_printf.c put_functions.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -I .
 HEADER = ft_printf.h
