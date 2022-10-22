@@ -6,7 +6,7 @@
 /*   By: mkhellou < mkhellou@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 09:05:57 by mkhellou          #+#    #+#             */
-/*   Updated: 2022/10/21 17:09:51 by mkhellou         ###   ########.fr       */
+/*   Updated: 2022/10/22 08:21:18 by mkhellou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ size_t	ft_strlen(const char *s)
 
 void	ft_putchar(char c, int *len)
 {
-	write(1, &c, 1);
-	(*len)++;
+	(*len) += write(1, &c, 1);
 }
 
 void	ft_putstr(char *s, int *len)
