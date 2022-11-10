@@ -5,83 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkhellou < mkhellou@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 09:06:03 by mkhellou          #+#    #+#             */
-/*   Updated: 2022/10/30 10:02:53 by mkhellou         ###   ########.fr       */
+/*   Created: 2022/11/09 11:52:58 by mkhellou          #+#    #+#             */
+/*   Updated: 2022/11/10 12:16:13 by mkhellou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putsubaddr(unsigned long i, char *base, int *len)
+void	ft_puthex(unsigned int i, int *len, char *base)
 {
-	if (i > ft_strlen(base)-1)
-		ft_putsubaddr(i / ft_strlen(base), base, len);
-	ft_putchar(base[i % ft_strlen(base)], len);
+	if (i > 15)
+		ft_puthex(i / 16, len, base);
+	ft_putchar(base[i % 16], len);
 }
 
-void	ft_putaddr(void *p, char *base, int *len)
+static void	ft_putsubptr(unsigned long long i, int *len, char *base)
+{
+	if (i > 15)
+		ft_putsubptr(i / 16, len, base);
+	ft_putchar(base[i % 16], len);
+}
+
+void	ft_putptr(unsigned long long i, int *len)
 {
 	ft_putstr("0x", len);
-	ft_putsubaddr((unsigned long)p, base, len);
+	ft_putsubptr(i, len, "0123456789abcdef");
 }
 
-void	ft_putuns(unsigned int i, int *len)
+static void	ft_format(char c, va_list ptr, int *len)
 {
-	if (i > 9)
-		ft_putuns(i / 10, len);
-	ft_putchar(i % 10 + '0', len);
-}
-
-void	ft_parser(char c, va_list pntr, int *len)
-{
-	char	*tmp;
-
 	if (c == 'c')
-		ft_putchar(va_arg(pntr, int), len);
+		ft_putchar(va_arg(ptr, int), len);
 	else if (c == 's')
-	{
-		tmp = va_arg(pntr, char *);
-		if (tmp == 0)
-			ft_putstr("(null)", len);
-		else
-			ft_putstr(tmp, len);
-	}
-	else if (c == 'd' || c == 'i')
-		ft_putnbr(va_arg(pntr, int), len);
+		ft_putstr(va_arg(ptr, char *), len);
+	else if (c == 'i' || c == 'd')
+		ft_putnbr(va_arg(ptr, int), len);
 	else if (c == 'u')
-		ft_putuns(va_arg(pntr, unsigned int), len);
-	else if (c == 'p')
-		ft_putaddr(va_arg(pntr, void *), HEX_LOW, len);
+		ft_putuns(va_arg(ptr, unsigned int), len);
 	else if (c == 'x')
-		ft_puthex(va_arg(pntr, unsigned int), HEX_LOW, len);
+		ft_puthex(va_arg(ptr, unsigned int), len, "0123456789abcdef");
 	else if (c == 'X')
-		ft_puthex(va_arg(pntr, unsigned int), HEX_UPP, len);
+		ft_puthex(va_arg(ptr, unsigned int), len, "0123456789ABCDEF");
+	else if (c == 'p')
+		ft_putptr(va_arg(ptr, unsigned long long), len);
 	else
 		ft_putchar(c, len);
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list	pntr;
-	size_t	i;
+	va_list	ptr;
+	int		i;
 	int		len;
 
 	i = 0;
 	len = 0;
-	va_start(pntr, s);
-	while (s[i])
+	va_start(ptr, str);
+	while (str[i])
 	{
-		if (s[i] != '%')
-		{
-			ft_putchar(s[i], &len);
-		}
+		if (str[i] != '%')
+			ft_putchar(str[i], &len);
 		else
 		{
 			i++;
-			ft_parser(s[i], pntr, &len);
+			ft_format(str[i], ptr, &len);
 		}
 		i++;
 	}
-	va_end(pntr);
-	return (len);
+	return (ft_putstr("hello", &len), len);
 }
