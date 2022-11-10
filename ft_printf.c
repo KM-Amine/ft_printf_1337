@@ -6,7 +6,7 @@
 /*   By: mkhellou < mkhellou@student.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:52:58 by mkhellou          #+#    #+#             */
-/*   Updated: 2022/11/10 12:16:13 by mkhellou         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:35:30 by mkhellou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ int	ft_printf(const char *str, ...)
 		}
 		i++;
 	}
-	return (ft_putstr("hello", &len), len);
+	return (len);
 }
